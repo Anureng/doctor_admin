@@ -6,6 +6,8 @@ import NavBar from '../component/Navbar';
 import Footer from '../component/Footer';
 import { LuStethoscope } from "react-icons/lu";
 import { FaCoins } from "react-icons/fa6";
+import BookingAppointmentTable from '../component/BookingAppointmentTable';
+import DoctorListTable from '../component/DoctorListTable';
 
 
 
@@ -14,12 +16,14 @@ function DashboardMain() {
     <>
       <div className='bg-[#0075691A] min-h-screen flex flex-col'>
         <NavBar />
-        <section className='flex flex-row  pb-10 gap-12 pt-10 w-[80%] mx-auto'>
+        <section className='flex flex-row  pb-10 gap-12 pt-10 w-[90%] mx-auto'>
           <div className='md:w-[35%] lg:w-[30%] hidden md:inline-flex'>
             <SidePanel />
           </div>
-          <div className='lg:w-[60%] w-full flex flex-col gap-20'>
-            <div className='grid grid-cols-1 md:grid-cols-2 justify-between  gap-3 w-full'>
+          <div className='lg:w-[70%]  w-full flex flex-col gap-20 '>
+
+
+            <div className='grid grid-cols-1 md:grid-cols-2 justify-between   md:gap-10  w-full lg:w-[85%] '>
               <div className='bg-[#CE70FA] lg:p-5 p-3 md:p-1   mt-10 md:mt-0 rounded-lg'>
                 <div className='flex gap-5 p-1 px-auto justify-between'>
                   <p><BsCalendar2DateFill className='  shadow-md shadow-gray-500 bg-white rounded-lg text-6xl text-[#CE70FA] p-2' /></p>
@@ -51,7 +55,10 @@ function DashboardMain() {
             </div>
 
 
-            <div >hello</div>
+            <div className='flex lg:flex-row flex-col gap-2 w-full' >
+              <BookingAppointmentTable className=" w-[60%] "/>
+              <DoctorListTable className=" w-[40%]"/>
+              </div>
           </div>
         </section>
 

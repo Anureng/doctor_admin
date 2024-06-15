@@ -4,50 +4,59 @@ import { FaUserInjured } from 'react-icons/fa';
 import { BsCalendar2DateFill } from "react-icons/bs";
 import NavBar from '../component/Navbar';
 import Footer from '../component/Footer';
+import { LuStethoscope } from "react-icons/lu";
+import { FaCoins } from "react-icons/fa6";
+
+
 
 function DashboardMain() {
   return (
     <>
-    <NavBar/>
-    <div className='bg-[#0075691A] min-h-screen flex flex-col'>
+      <div className='bg-[#0075691A] min-h-screen flex flex-col'>
+        <NavBar />
         <section className='flex flex-row  pb-10 gap-12 pt-10 w-[80%] mx-auto'>
-        <div className='md:w-[35%] lg:w-[30%] hidden md:inline-flex'>
-          <SidePanel />
-        </div>
-        <div className='lg:w-[60%] w-full flex flex-col gap-20'>
-          <div className='flex flex-col md:flex-row justify-between  gap-3 w-full'>
-            <div className='bg-[#FA7070] lg:p-5 p-3 md:p-1 rounded-lg'>
-              <div className='flex gap-5'>
-                <p><FaUserInjured className=' bg-white rounded-lg text-6xl text-[#FA7070] p-2' /></p>
-                <div className='lg:text-[32px] text-xl leading-7 font-bold text-white flex flex-col text-start' >  <p >Total</p>
-                  <p> Appointments</p>
-                </div>
-              </div>
-              <div className='flex gap-10 leading-7 pt-5 font-bold text-white text-start'>
-                <p className='text-xl'>5% higher than last week</p>
-                <p className=' text-[32px]'>20</p>
-              </div>
-            </div>
-
-            <div className='bg-[#A1C398] lg:p-5 p-3 md:p-1   mt-10 md:mt-0 rounded-lg'>
-              <div className='flex gap-5'>
-                <p><BsCalendar2DateFill className='  bg-white rounded-lg text-6xl text-[#A1C398] p-2' /></p>
-                <div className='lg:text-[32px] text-xl  leading-7 font-bold text-white flex flex-col text-start' >  <p>Completed </p>
-                  <p> Appointments</p>
-                </div>
-              </div>
-              <div className='flex gap-10 leading-7 pt-5 font-bold text-white text-start'>
-                <p className='text-xl'>5% higher than last week</p>
-                <p className=' text-[32px]'>20</p>
-              </div>
-            </div>
+          <div className='md:w-[35%] lg:w-[30%] hidden md:inline-flex'>
+            <SidePanel />
           </div>
-          <div >hello</div>
-        </div>
-      </section>
+          <div className='lg:w-[60%] w-full flex flex-col gap-20'>
+            <div className='grid grid-cols-1 md:grid-cols-2 justify-between  gap-3 w-full'>
+              <div className='bg-[#CE70FA] lg:p-5 p-3 md:p-1   mt-10 md:mt-0 rounded-lg'>
+                <div className='flex gap-5 p-1 px-auto justify-between'>
+                  <p><BsCalendar2DateFill className='  shadow-md shadow-gray-500 bg-white rounded-lg text-6xl text-[#CE70FA] p-2' /></p>
+                  <p className=' text-white  font-bold text-[37px]'>213</p>
+                </div>
+                <p className='lg:text-[25px] text-xl  pt-5 leading-6 font-bold text-white  text-start'>Total Appointments</p>
+              </div>
+              <div className='bg-[#FA7070] lg:p-5 p-3 md:p-1   mt-10 md:mt-0 rounded-lg'>
+                <div className='flex gap-5 p-1 px-auto justify-between'>
+                  <p><FaUserInjured className='  shadow-md shadow-gray-500 bg-white rounded-lg text-6xl text-[#FA7070] p-2' /></p>
+                  <p className=' text-white  font-bold text-[37px]'>1350</p>
+                </div>
+                <p className='lg:text-[25px] text-xl  pt-5 leading-6 font-bold text-white  text-start'>Total Patient</p>
+              </div>
+              <div className='bg-[#FADC70] lg:p-5 p-3 md:p-1   mt-10 md:mt-0 rounded-lg'>
+                <div className='flex gap-5 p-1 px-auto justify-between'>
+                  <p><LuStethoscope className='  shadow-md shadow-gray-500 bg-white rounded-lg text-6xl text-[#FADC70] p-2' /></p>
+                  <p className=' text-white  font-bold text-[37px]'>28</p>
+                </div>
+                <p className='lg:text-[25px] text-xl  pt-5 leading-6 font-bold text-white  text-start'>Total Doctor</p>
+              </div>
+              <div className='bg-[#70A7FA] lg:p-5 p-3 md:p-1   mt-10 md:mt-0 rounded-lg'>
+                <div className='flex gap-5 p-1 px-auto justify-between'>
+                  <p><FaCoins className='  shadow-md shadow-gray-500 bg-white rounded-lg text-6xl text-[#70A7FA] p-2' /></p>
+                  <p className=' text-white  font-bold text-[37px]'>₹13</p>
+                </div>
+                <p className='lg:text-[25px] text-xl  pt-5 leading-6 font-bold text-white  text-start'>Hospital Earnings</p>
+              </div>
+            </div>
 
-    </div>
-    <Footer/>
+
+            <div >hello</div>
+          </div>
+        </section>
+
+      </div>
+      <Footer />
     </>
   )
 }

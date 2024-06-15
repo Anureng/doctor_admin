@@ -68,8 +68,8 @@ const SidePanel = () => {
                     </div>
                     {isPatientOpen && (
                         <div className='flex flex-col gap-2 ml-10 text-xl'>
-                            <div className={`cursor-pointer flex items-center gap-2 px-4 w-full text-lg ${getActiveStyleSub('/patient/list')}`} onClick={() => handleNavigation('/patient/list')}><GoTriangleRight className='text-sm ' />Patient List</div>
-                            <div className={`cursor-pointer flex items-center gap-2 px-4 w-full text-lg ${getActiveStyleSub('/patient/profile')}`} onClick={() => handleNavigation('/patient/profile')}> <GoTriangleRight className='text-sm ' />Patient Profile</div>
+                            <div className={`cursor-pointer flex items-center gap-2 px-4 w-full text-lg ${getActiveStyleSub('/patient/plist')}`} onClick={() => handleNavigation('/patient/plist')}><GoTriangleRight className='text-sm ' />Patient List</div>
+                            <div className={`cursor-pointer flex items-center gap-2 px-4 w-full text-lg ${getActiveStyleSub('/patient/pprofile')}`} onClick={() => handleNavigation('/patient/pprofile')}> <GoTriangleRight className='text-sm ' />Patient Profile</div>
                         </div>
                     )}
                 </div>

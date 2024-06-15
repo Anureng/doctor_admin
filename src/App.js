@@ -10,6 +10,8 @@ import DoctorList from "./component/DoctorList";
 import DoctorProfile from "./component/DoctorProfile";
 import PatientList from "./component/PatientList";
 import PatientProfile from "./component/PatientProfile";
+import LoginPage from './pages/LoginPage';
+import SignUp from './pages/SignUp';
 
 
 function App() {
@@ -28,7 +30,9 @@ function App() {
             <Route path='/patient/profile' element={<PatientProfile />} />
           </Route>
           <Route path='/review' element={<Review />} />
-          <Route path='/details' element={<PersonalDetails />} />╬
+          <Route path='/details' element={<PersonalDetails />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<SignUp />} />
           <Route />
         </Routes>
       </BrowserRouter>

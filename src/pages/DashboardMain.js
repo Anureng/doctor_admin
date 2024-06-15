@@ -2,9 +2,13 @@ import React from 'react'
 import SidePanel from "../component/SidePanel"
 import { FaUserInjured } from 'react-icons/fa';
 import { BsCalendar2DateFill } from "react-icons/bs";
+import NavBar from '../component/Navbar';
+import Footer from '../component/Footer';
 
 function DashboardMain() {
   return (
+    <>
+    <NavBar/>
     <div className='bg-[#0075691A] min-h-screen flex flex-col'>
         <section className='flex flex-row  pb-10 gap-12 pt-10 w-[80%] mx-auto'>
         <div className='md:w-[35%] lg:w-[30%] hidden md:inline-flex'>
@@ -43,6 +47,8 @@ function DashboardMain() {
       </section>
 
     </div>
+    <Footer/>
+    </>
   )
 }
 

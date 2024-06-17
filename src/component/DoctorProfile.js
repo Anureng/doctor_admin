@@ -1,11 +1,8 @@
 import React from 'react'
 import Footer from './Footer';
 import SidePanel from './SidePanel';
-
 import Navbar from './Navbar';
-import AllUser from './AllUser';
 import AllDoctor from './AllDoctor';
-
 
 const DoctorProfile = () => {
   return (

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
 import SidePanel from './SidePanel';
 
-function NavBar() {
+function Navbar() {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const getdata = localStorage.getItem("token");
@@ -66,4 +66,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default Navbar;

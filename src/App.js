@@ -6,12 +6,12 @@ import Doctor from "./pages/Doctor";
 import Patient from "./pages/Patient";
 import Review from "./pages/Review";
 import PersonalDetails from "./pages/PersonalDetails";
-import LoginPage from './pages/LoginPage';
-import SignUp from './pages/SignUp';
 import DoctorList from "./component/DoctorList";
 import DoctorProfile from "./component/DoctorProfile";
 import PatientList from "./component/PatientList";
 import PatientProfile from "./component/PatientProfile";
+import LoginPage from './pages/LoginPage';
+import SignUp from './pages/SignUp';
 
 
 function App() {
@@ -21,15 +21,12 @@ function App() {
         <Routes>
           <Route path='/dashboard' element={<DashboardMain />} />
           <Route path='/appointment' element={<Appointment />} />
-          <Route path='/doctor' element={<Doctor />}>
+          
             <Route path='/doctor/list' element={<DoctorList />} />
             <Route path='/doctor/profile' element={<DoctorProfile />} />
-          </Route>
-
-          <Route path='/patient' element={<Patient />}>
-            <Route path='/patient/plist' element={<PatientList />} />
-            <Route path='/patient/pprofile' element={<PatientProfile />} />
-          </Route>
+          
+            <Route path='/patient/list' element={<PatientList />} />
+            <Route path='/patient/profile' element={<PatientProfile />} />
           <Route path='/review' element={<Review />} />
           <Route path='/details' element={<PersonalDetails />} />
           <Route path="/login" element={<LoginPage />} />

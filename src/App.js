@@ -12,6 +12,7 @@ import PatientList from "./component/PatientList";
 import PatientProfile from "./component/PatientProfile";
 import LoginPage from './pages/LoginPage';
 import SignUp from './pages/SignUp';
+import DoctorDetail from "./component/DoctorDetail"
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           
             <Route path='/doctor/list' element={<DoctorList />} />
             <Route path='/doctor/profile' element={<DoctorProfile />} />
+            <Route path='/doctor/profile/:id' element={<DoctorDetail />} />
           
             <Route path='/patient/list' element={<PatientList />} />
             <Route path='/patient/profile' element={<PatientProfile />} />

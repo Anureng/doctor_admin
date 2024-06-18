@@ -99,7 +99,7 @@ function DoctorDetail() {
                     <div className=' hidden md:inline-flex'>
                         <SidePanel />
                     </div>
-                    <div className='lg:w-3/5 w-full'>
+                    <div className='lg:w-3/5 flex flex-col w-full'>
                         <section className='lg:flex lg:flex-row  lg:mx-auto md:mx-10 grid grid-cols-1 bg-white p-4 gap-2 rounded-lg border-[1px] border-[#BABABA] mx-auto justify-between'>
                             <div className='lg:w-[25%]  p-2 mx-auto bg-white'>
                                 <img className='h-[220px] w-[220px]  rounded-md overflow-hidden  bg-[#017A884D]' src={selectedDoctor.image} alt='doctor' />
@@ -145,6 +145,15 @@ function DoctorDetail() {
 
                             </div>
 
+                        </section>
+
+                        <section className=' bg-white rounded-lg mt-3 border border-gray-400 '>
+                        <div className="p-4 text-start  rounded-lg">
+                            <h2 className="text-xl  pb-10 font-bold">About {selectedDoctor.name}</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
                         </section>
                     </div>
                 </section>

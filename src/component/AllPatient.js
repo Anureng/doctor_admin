@@ -1,50 +1,43 @@
 import React, { useEffect, useState } from 'react'
 
 const AllPatient = () => {
-    const [data, setData] = useState([
-        {
-          id:1,
-          name: "guf",
-          degree: "Dentist",
-          clinicName: "kugif",
-          available: ["mon", "wed", "thus", "sun"],
-          location: "america",
-          available: "true",
-        },
-        {
-          id:2,
-          name: "gu",
-          degree: "goi",
-          clinicName: "gilllglg",
-          available: ["mon", "wed", "thus", "sun"],
-          location: "ifiiyfyf",
-          available: "true",
-        },
-        {
-          id:3,
-          name: "guf",
-          degree: "Dentist",
-          clinicName: "kugif",
-          available: ["mon", "wed", "thus", "sun"],
-          location: "america",
-          available: "true",
-        },
-        {
-          id:4,
-          name: "jfkfk",
-          degree: "ggoogo",
-          clinicName: "jkf",
-          available: ["mon", "wed", "thus", "sun"],
-          location: "jkk",
-          available: "true",
-        },
-      ]);
+    const [data, setData] = useState([]);
     
       const [filteredData, setFilteredData] = useState(data);
       const [searchDoctor, setSearchDoctor] = useState('');
       const [searchLocation, setSearchLocation] = useState('');
       const [searchGender, setSearchGender] = useState('');
       const [searchSpecialist, setSearchSpecialist] = useState('');
+
+
+      
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://doctors-backend-ztcl.onrender.com/users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setData(data)
+        console.log(data)
+      } else {
+        alert("Something went wrong please login again");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  }
+
+  useEffect(() => {
+
+    fetchData();
+  }, []);
     
       useEffect(() => {
         let filtered = data;

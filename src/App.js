@@ -13,14 +13,32 @@ import PatientProfile from "./component/PatientProfile";
 import LoginPage from './pages/LoginPage';
 import SignUp from './pages/SignUp';
 import DoctorDetail from "./component/DoctorDetail"
+import { useAuth } from './AuthContext';
 
 
 function App() {
+  const {isLoggedIn } = useAuth();
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<DashboardMain />} />
+          {
+          isLoggedIn ?<> <Route path='/' element={<DashboardMain />} />
+          <Route path='/dashboard' element={<DashboardMain />} />
+          <Route path='/appointment' element={<Appointment />} />
+          
+            <Route path='/doctor/list' element={<DoctorList />} />
+            <Route path='/doctor/profile' element={<DoctorProfile />} />
+            <Route path='/doctor/profile/:id' element={<DoctorDetail />} />
+          
+            <Route path='/patient/list' element={<PatientList />} />
+            <Route path='/patient/profile' element={<PatientProfile />} />
+          <Route path='/review' element={<Review />} />
+          <Route path='/details' element={<PersonalDetails />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route /></>:<><Route path='/' element={<LoginPage />} />
+          <Route path='/dashboard' element={<LoginPage />} />
           <Route path='/appointment' element={<Appointment />} />
           
             <Route path='/doctor/list' element={<DoctorList />} />
@@ -34,6 +52,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUp />} />
           <Route />
+          </>
+}
         </Routes>
       </BrowserRouter>
     </div>

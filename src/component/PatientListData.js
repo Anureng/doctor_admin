@@ -1,60 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { FaAngleRight } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 const PatientListData = () => {
-    const users = [
+  const [users, setusers] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://doctors-backend-ztcl.onrender.com/users",
         {
-          profile: 'https://s3-alpha-sig.figma.com/img/274e/e88b/4ba090887500f714810fb576dab7b349?Expires=1719187200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kXbicaYYTqjImhhZitaEUSFz88uxNFAyCyBicqP-7q-6hBngnD1WJpbvBAOGkPmH-jiykmjLiAlBzJw8iIo9L3Okv7WB8ZhF3YR3UZOcedBRAh0SDNCSAchglqnqchTsOKdiKERGW7AEb7b16Brq1rXQQfTTIxpewaYbUSNHH-ZxYer0j-fr9J3Z7TOwMPgpmbXGG0ovb9uNQOpqwWYnqCdm5nXjR6WNycJrlkQhgJNCKuh8kt1AFqkHXGPccdEU4uiQYBvywgUHmdD3bUZu9OzikRUSKgKkTB8KTt~AoFCHpFscew4rJ7P9YWPWDxfybDe9mQyIuEuV5DOMoqkmOw__',
-          name: 'John Doe',
-          diseases: 'Diabetes',
-          email: 'john.doe@example.com',
-          phone: '123-456-7890',
-          gender:"male",
-          Status:"In Treatment",
-          Blood:"B-"
-        },
-        {
-          profile: 'https://s3-alpha-sig.figma.com/img/274e/e88b/4ba090887500f714810fb576dab7b349?Expires=1719187200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kXbicaYYTqjImhhZitaEUSFz88uxNFAyCyBicqP-7q-6hBngnD1WJpbvBAOGkPmH-jiykmjLiAlBzJw8iIo9L3Okv7WB8ZhF3YR3UZOcedBRAh0SDNCSAchglqnqchTsOKdiKERGW7AEb7b16Brq1rXQQfTTIxpewaYbUSNHH-ZxYer0j-fr9J3Z7TOwMPgpmbXGG0ovb9uNQOpqwWYnqCdm5nXjR6WNycJrlkQhgJNCKuh8kt1AFqkHXGPccdEU4uiQYBvywgUHmdD3bUZu9OzikRUSKgKkTB8KTt~AoFCHpFscew4rJ7P9YWPWDxfybDe9mQyIuEuV5DOMoqkmOw__',
-          name: 'Jane Smith',
-          diseases: 'Hypertension',
-          email: 'jane.smith@example.com',
-          phone: '987-654-3210',
-          gender:"male",
-          Status:"New Patient",
-          Blood:"A+"
-        },
-        {
-          profile: 'https://s3-alpha-sig.figma.com/img/274e/e88b/4ba090887500f714810fb576dab7b349?Expires=1719187200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kXbicaYYTqjImhhZitaEUSFz88uxNFAyCyBicqP-7q-6hBngnD1WJpbvBAOGkPmH-jiykmjLiAlBzJw8iIo9L3Okv7WB8ZhF3YR3UZOcedBRAh0SDNCSAchglqnqchTsOKdiKERGW7AEb7b16Brq1rXQQfTTIxpewaYbUSNHH-ZxYer0j-fr9J3Z7TOwMPgpmbXGG0ovb9uNQOpqwWYnqCdm5nXjR6WNycJrlkQhgJNCKuh8kt1AFqkHXGPccdEU4uiQYBvywgUHmdD3bUZu9OzikRUSKgKkTB8KTt~AoFCHpFscew4rJ7P9YWPWDxfybDe9mQyIuEuV5DOMoqkmOw__',
-          name: 'Alice Johnson',
-          diseases: 'Asthma',
-          email: 'alice.johnson@example.com',
-          phone: '555-666-7777',
-          gender:"Female",
-          Status:"Recovered",
-          Blood:"B+"
-        },
-        
-        {
-          profile: 'https://s3-alpha-sig.figma.com/img/274e/e88b/4ba090887500f714810fb576dab7b349?Expires=1719187200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kXbicaYYTqjImhhZitaEUSFz88uxNFAyCyBicqP-7q-6hBngnD1WJpbvBAOGkPmH-jiykmjLiAlBzJw8iIo9L3Okv7WB8ZhF3YR3UZOcedBRAh0SDNCSAchglqnqchTsOKdiKERGW7AEb7b16Brq1rXQQfTTIxpewaYbUSNHH-ZxYer0j-fr9J3Z7TOwMPgpmbXGG0ovb9uNQOpqwWYnqCdm5nXjR6WNycJrlkQhgJNCKuh8kt1AFqkHXGPccdEU4uiQYBvywgUHmdD3bUZu9OzikRUSKgKkTB8KTt~AoFCHpFscew4rJ7P9YWPWDxfybDe9mQyIuEuV5DOMoqkmOw__',
-          name: 'Bob Brown',
-          diseases: 'Allergies',
-          email: 'bob.brown@example.com',
-          phone: '444-555-6666',
-          gender:"Female",
-               Status:"New Patient",
-          Blood:"AB-"
-        },
-        {
-          profile: 'https://s3-alpha-sig.figma.com/img/274e/e88b/4ba090887500f714810fb576dab7b349?Expires=1719187200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kXbicaYYTqjImhhZitaEUSFz88uxNFAyCyBicqP-7q-6hBngnD1WJpbvBAOGkPmH-jiykmjLiAlBzJw8iIo9L3Okv7WB8ZhF3YR3UZOcedBRAh0SDNCSAchglqnqchTsOKdiKERGW7AEb7b16Brq1rXQQfTTIxpewaYbUSNHH-ZxYer0j-fr9J3Z7TOwMPgpmbXGG0ovb9uNQOpqwWYnqCdm5nXjR6WNycJrlkQhgJNCKuh8kt1AFqkHXGPccdEU4uiQYBvywgUHmdD3bUZu9OzikRUSKgKkTB8KTt~AoFCHpFscew4rJ7P9YWPWDxfybDe9mQyIuEuV5DOMoqkmOw__',
-          name: 'Charlie Davis',
-          diseases: 'Arthritis',
-          email: 'charlie.davis@example.com',
-          phone: '333-444-5555',
-          gender:"Female",
-         Status:"In Treatment",
-          Blood:"B-"
-        },
-      ];
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setusers(data)
+        console.log(data)
+      } else {
+        alert("Something went wrong please login again");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  }
+
+  useEffect(() => {
+
+    fetchData();
+  }, []);
     
       const [search, setSearch] = useState("");
     

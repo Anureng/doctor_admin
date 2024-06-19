@@ -1,41 +1,39 @@
 // DoctorListTable.js
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 
-const doctorData = [
-  {
-    id: 1,
-    profilePic: 'https://via.placeholder.com/40', // Replace with actual image URLs
-    name: 'Dr. Smith',
-    status: 'Present',
-  },
-  {
-    id: 2,
-    profilePic: 'https://via.placeholder.com/40',
-    name: 'Dr. Johnson',
-    status: 'Absent',
-  },
-  {
-    id: 3,
-    profilePic: 'https://via.placeholder.com/40',
-    name: 'Dr. Johnson',
-    status: 'Present',
-  },
-  {
-    id: 4,
-    profilePic: 'https://via.placeholder.com/40',
-    name: 'Dr. Johnson',
-    status: 'Absent',
-  },
-  {
-    id: 5,
-    profilePic: 'https://via.placeholder.com/40',
-    name: 'Dr. Johnson',
-    status: 'Present',
-  },
-  // Add more data as needed
-];
+
 
 const DoctorListTable = () => {
+  const [doctorData, setdoctorData] = useState("");
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://doctors-backend-ztcl.onrender.com/users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setdoctorData(data)
+        console.log(data)
+      } else {
+        alert("Something went wrong please login again");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  }
+
+  useEffect(() => {
+
+    fetchData();
+  }, []);
+
   return (
     <div className="overflow-x-auto">
               <h1 className="text-xl text-start bg-white rounded-t-xl py-3 px-4 font-bold ">Doctors List</h1>

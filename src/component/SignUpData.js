@@ -7,7 +7,7 @@ const SignUpData = () => {
   const [password , setPassword] = useState("")
   const [rpassword , setrPassword] = useState("")
   const [location , setlocation] = useState("")
-  const [startas , setstartas] = useState("")
+  const [type , settype] = useState("")
   const [firstname , setfirstname] = useState("")
   const [lastname , setlastname] = useState("")
 
@@ -24,7 +24,7 @@ const SignUpData = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password ,location,firstname,lastname,startas}),
+          body: JSON.stringify({ email, password ,location,firstname,lastname,type}),
         }
       );
 
@@ -127,10 +127,10 @@ navigate('/login')
               <input type="radio" id="patient" name="role" value="patient" className='mr-2' 
               onChange={(e)=>{
                 if(e.target.checked){
-                  setstartas("patient")
+                  settype("patient")
                 }
                 else{
-                  setstartas("doctor")
+                  settype("doctor")
                 }
               }}
               />
@@ -139,10 +139,10 @@ navigate('/login')
             <div className='flex items-center'>
               <input type="radio" id="doctor" name="role" value="doctor" className='mr-2' onChange={(e)=>{
                 if(e.target.checked){
-                  setstartas("doctor")
+                  settype("doctor")
                 }
                 else{
-                  setstartas("patient")
+                  settype("patient")
                  
                 }
               }}/>

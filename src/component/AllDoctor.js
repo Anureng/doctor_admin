@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MdOutlineVerified } from "react-icons/md";
@@ -12,44 +8,7 @@ import { IoClipboardOutline } from "react-icons/io5";
 import { GrLocation } from "react-icons/gr";
 
 const AllDoctor = () => {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      name: "Dr. Wanitha ",
-      degree: "Dentist",
-      clinicName: "Smile clinic",
-      availableDays: "Mon, Wed, Thu, Fri, Sat",
-      location: "america",
-     
-    },
-    {
-      id: 2,
-      name: "Dr. John Doe",
-      degree: "MBBS",
-      clinicName: "Health ",
-      availableDays: "Mon, Wed, Thu, Fri, Sat",
-      location: "america",
-     
-    },
-    {
-      id: 3,
-      name: "Dr. Wanitha",
-      degree: "Dentist",
-      clinicName: "Life Care",
-      availableDays: "Mon, Wed, Thu, Fri, Sat",
-      location: "america",
-     
-    },
-    {
-      id: 4,
-      name: "Dr. Emily",
-      degree: "ggoogo",
-      clinicName: "jkf",
-      availableDays: "Mon, Wed, Thu, Fri, Sat",
-      location: "jkk",
-     
-    },
-  ]);
+  const [data, setData] = useState([]);
 
   const [filteredData, setFilteredData] = useState(data);
   const [searchDoctor, setSearchDoctor] = useState('');
@@ -80,6 +39,36 @@ const AllDoctor = () => {
 
     setFilteredData(filtered);
   }, [searchDoctor, searchLocation, searchGender, searchSpecialist, data]);
+
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://doctors-backend-ztcl.onrender.com/users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setData(data)
+        console.log(data)
+      } else {
+        alert("Something went wrong please login again");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  }
+
+  useEffect(() => {
+
+    fetchData();
+  }, []);
+
 
   return (
     <div>

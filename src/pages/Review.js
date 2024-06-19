@@ -1,70 +1,42 @@
 
 
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import Navbar from '../component/Navbar';
 import Footer from '../component/Footer';
 import SidePanel from '../component/SidePanel';
 import { CiSearch } from "react-icons/ci";
 
-const reviewsData = [
-  {
-    name: "John Doe",
-    rating: 5,
-    feedback: "I am very much glad to note my feedback and grateful. Thanks to Dr. Chibber and assistants. I got very good guidelines for my patient.",
-    date: "2023-06-15",
-    disease: "cold and flu",
-    image: "doctor1.png",
-    status: "all review",
-  },
-  {
-    name: "emily",
-    rating: 5,
-    feedback: "I am very much glad to note my feedback and grateful. Thanks to Dr. Chibber and assistants. I got very good guidelines for my patient.",
-    date: "2023-06-15",
-    disease: "cold and flu",
-    image: "doctor1.png",
-    status: "all review",
-  },
-  {
-    name: "Jane Smith",
-    rating: 4,
-    feedback: "Dr. Chibber was very helpful and provided excellent advice.",
-    date: "2023-06-16",
-    disease: "fever",
-    image: "doctor1.png",
-    status: "published",
-  },
-  {
-    name: "Mike Johnson",
-    rating: 3,
-    feedback: "The consultation was average, but the staff was friendly.",
-    date: "2023-06-17",
-    disease: "cough",
-    image: "login.png",
-    status: "deleted",
-  },
-  {
-    name: "Mike Johnson",
-    rating: 3,
-    feedback: "The consultation was average, but the staff was friendly.",
-    date: "2023-06-17",
-    disease: "cough",
-    image: "login.png",
-    status: "deleted",
-  },
-  {
-    name: "Mike Johnson",
-    rating: 3,
-    feedback: "The consultation was average, but the staff was friendly.",
-    date: "2023-06-17",
-    disease: "cough",
-    image: "login.png",
-    status: "deleted",
-  },
-];
-
 function Review() {
+  const [reviewsData, setreviewsData] = useState([]);
   const [activeTab, setActiveTab] = useState('all review');
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://doctors-backend-ztcl.onrender.com/getallfeedback",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setreviewsData(data)
+        console.log(data)
+      } else {
+        alert("Something went wrong please login again");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  }
+
+  useEffect(() => {
+
+    fetchData();
+  }, []);
 
   const filteredReviews = reviewsData.filter(review => review.status === activeTab);
 

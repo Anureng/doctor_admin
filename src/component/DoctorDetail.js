@@ -12,70 +12,40 @@ import SidePanel from './SidePanel';
 import Navbar from './Navbar';
 
 
-const doctors = [
-    {
-        id: 1,
-        name: "Dr. Wanitha ",
-        degree: "Dentist",
-        clinicName: "Smile clinic",
-        service: "MBBS",
-        specialty: "Specialty",
-        image: "/doctor1.png",
-        availableDays: "Mon, Wed, Thu, Fri, Sat",
-        feedbackCount: 3,
-        location: "America",
-        experience: "12+ Years Of experience",
-        patientsTreated: 3,
-    },
-    {
-        id: 2,
-        name: "Dr. John Doe ",
-        degree: "Dentist",
-        clinicName: "Health",
-        service: "MBBS",
-        specialty: "Neurologist",
-        image: "/doctor1.png",
-        availableDays: "Mon, Wed, Thu, Fri, Sat",
-        feedbackCount: 3,
-        location: "America",
-        experience: "12+ Years Of experience",
-        patientsTreated: 3,
-    },
-    {
-        id: 3,
-        name: "Dr. Wanitha ",
-        degree: "Dentist",
-        clinicName: "Life Care",
-        service: "MBBS",
-        specialty: "Specialty",
-        image: "/doctor1.png",
-        availableDays: "Mon, Wed, Thu, Fri, Sat",
-        feedbackCount: 3,
-        location: "America",
-        experience: "12+ Years Of experience",
-        patientsTreated: 3,
-    },
-    {
-        id: 4,
-        name: "Dr. Emily ",
-        degree: "Dentist",
-        clinicName: "Smile clinic",
-        service: "MBBS",
-        specialty: "Specialty",
-        image: "/doctor1.png",
-        availableDays: "Mon, Wed, Thu, Fri, Sat",
-        feedbackCount: 3,
-        location: "America",
-        experience: "12+ Years Of experience",
-        patientsTreated: 3,
-    },
-   
-];
-
-
 function DoctorDetail() {
     const { id } = useParams();
+    const [doctors, setdoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState(null);
+
+
+    const fetchData = async () => {
+        try {
+          const response = await fetch(
+            "https://doctors-backend-ztcl.onrender.com/users",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          if (response.ok) {
+            const data = await response.json();
+            setdoctors(data)
+            console.log(data)
+          } else {
+            alert("Something went wrong please login again");
+          }
+        } catch (error) {
+          console.error("Error during login:", error);
+        }
+      }
+    
+      useEffect(() => {
+    
+        fetchData();
+      }, []);
+    
 
     useEffect(() => {
         const doctor = doctors.find(doc => doc.id === parseInt(id));

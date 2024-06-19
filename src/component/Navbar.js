@@ -5,8 +5,10 @@ import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { Link } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
 import SidePanel from './SidePanel';
+import { useAuth } from '../AuthContext';
 
 function Navbar() {
+  const {isLoggedIn } = useAuth();
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const getdata = localStorage.getItem("token");
@@ -48,8 +50,8 @@ function Navbar() {
               <Link to="/about"><li className={`cursor-pointer flex items-center justify-center ${open ? 'bg-[#007569] text-white p-2 rounded-md' : ''}`}>About Us <IoIosArrowDown className='text-xl' /></li></Link>
             </div>
 
-            {getdata ? (
-              <Link to="/profile" className={`mt-4 lg:mt-0 ${open ? 'bg-[#007569] w-full flex items-center justify-center text-white p-2 rounded-md' : ''}`}>
+            {isLoggedIn ? (
+              <Link to="/details" className={`mt-4 lg:mt-0 ${open ? 'bg-[#007569] w-full flex items-center justify-center text-white p-2 rounded-md' : ''}`}>
                 <FaUser className='text-2xl cursor-pointer' />
               </Link>
             ) : (

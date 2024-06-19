@@ -1,3 +1,5 @@
+import {storage} from "../firebase.config";
+import {ref, uploadBytes, getDownloadURL} from "firebase/storage"
 import React from 'react'
 import { useState } from 'react';
 
@@ -14,50 +16,50 @@ const SettingPersonal = () => {
 
 
   
-  // const uploadimage = async(e) =>{
-  //   const id = localStorage.getItem("userId");
-  //   const imageRef1 = ref(storage,id);
-  //   if (e) {
-  //       uploadBytes(imageRef1, e).then(() => {
-  //           getDownloadURL(imageRef1).then((url) => {
-  //               setProfilepic(url);
-  //               alert("uploaded")
-  //           }).catch((error) => {
-  //               console.log(error.message, "error geting the image url");
-  //           })
-  //       }).catch((error) => {
-  //           console.log(error.message);
-  //       })
-  //   }
-  // }
+  const uploadimage = async(e) =>{
+    const id = localStorage.getItem("userId");
+    const imageRef1 = ref(storage,id);
+    if (e) {
+        uploadBytes(imageRef1, e).then(() => {
+            getDownloadURL(imageRef1).then((url) => {
+                setProfilepic(url);
+                alert("uploaded")
+            }).catch((error) => {
+                console.log(error.message, "error geting the image url");
+            })
+        }).catch((error) => {
+            console.log(error.message);
+        })
+    }
+  }
 
 
 
-  // const handlePersonalInfoSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const data = await fetch(
-  //       "https://doctors-backend-ztcl.onrender.com/updatesettings/660be57c3b9e529a2236f462",
-  //       {
-  //         method: "PATCH",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ gender: gender, language: language, bio: bio, Phoneno: Phoneno, firstname: firstname, lastname: lastname,profilepic:profilepic }),
-  //       }
-  //     );
+  const handlePersonalInfoSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await fetch(
+        "https://doctors-backend-ztcl.onrender.com/updatesettings/660be57c3b9e529a2236f462",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ gender: gender, language: language, bio: bio, Phoneno: Phoneno, firstname: firstname, lastname: lastname,profilepic:profilepic }),
+        }
+      );
 
-  //     if (data.ok) {
-  //       alert("added successfully")
-  //     }
-  //     else {
-  //       alert("Try Again and reload the page")
-  //     }
+      if (data.ok) {
+        alert("added successfully")
+      }
+      else {
+        alert("Try Again and reload the page")
+      }
 
-  //   } catch (error) {
-  //     alert("Try Again and reload the page")
-  //   }
-  // }
+    } catch (error) {
+      alert("Try Again and reload the page")
+    }
+  }
 
 
 
@@ -106,7 +108,10 @@ const SettingPersonal = () => {
             onChange={(e) => setPhoneno(e.target.value)}
             className='p-2 focus:outline-none rounded-xl' />
 
-         <label className='w-fit font-semibold text-2xl'>Select Language</label>
+
+          <textarea rows="4" cols="50" value={bio} onChange={(e) => setBio(e.target.value)} placeholder='About Me' className='p-2 focus:outline-none rounded-xl'></textarea>
+
+         
           <select
             placeholder='Enter Language'
             className='p-2 focus:outline-none rounded-xl text-gray-500'
@@ -119,7 +124,10 @@ const SettingPersonal = () => {
             <option value='spanish'>spanish</option>
             <option value='other'>other</option>
           </select>
-          
+           
+
+
+
           <div className='w-full'>
 
             <label className='block pb-2 font-semibold'>Profile Picture</label>
@@ -131,6 +139,13 @@ const SettingPersonal = () => {
                 // onChange={handleProfilePicChange}
                 className='hidden'
                 id='fileInput'
+                onChange={
+                  (e) => {
+                      if (e.target.files[0]) {
+                          uploadimage(e.target.files[0])
+                      }
+                  }
+                }
               />
               <div className='flex flex-row'>
                 <label
@@ -146,7 +161,7 @@ const SettingPersonal = () => {
 
           <p className=' flex justify-end mt-3'>
             <button className='bg-[#007569] px-3 py-1 rounded-lg text-white'
-              >
+              onClick={handlePersonalInfoSubmit}>
               Save Changes
             </button>
           </p>

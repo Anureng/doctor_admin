@@ -34,12 +34,12 @@ const SettingPersonal = () => {
   }
 
 
-
   const handlePersonalInfoSubmit = async (e) => {
+    const id = localStorage.getItem("userId");
     e.preventDefault();
     try {
       const data = await fetch(
-        "https://doctors-backend-ztcl.onrender.com/updatesettings/660be57c3b9e529a2236f462",
+        `https://doctors-backend-ztcl.onrender.com/updatesettings/${id}`,
         {
           method: "PATCH",
           headers: {

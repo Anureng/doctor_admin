@@ -20,7 +20,6 @@ const DoctorListTable = () => {
       if (response.ok) {
         const data = await response.json();
         setdoctorData(data)
-        console.log(data)
       } else {
         alert("Something went wrong please login again");
       }
@@ -46,7 +45,9 @@ const DoctorListTable = () => {
           </tr>
         </thead>
         <tbody>
-          {doctorData.map((doctor) => (
+          {doctorData.filter((e)=>(
+                      e.type=="doctor"
+                    )).map((doctor) => (
             <tr key={doctor.id} className="text-center border-t">
               <td className="px-4 py-2">
                 <img

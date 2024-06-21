@@ -76,12 +76,14 @@ const PatientListData = () => {
           </tr>
         </thead>
         <tbody>
-          {filterByData.map((user, index) => (
+          {filterByData.filter((e)=>(
+                      e.type=="patient"
+                    )).map((user, index) => (
             <tr key={index} className="border-b">
               <td className='flex items-center justify-center p-2'>
                 <img src={user.profile} className='w-10 h-10 rounded-full' alt='Profile' />
               </td>
-              <td className='p-2'>{user.name}</td>
+              <td className='p-2'>{user.firstname}</td>
               <td className='p-2'>{user.gender}</td>
               <td className='p-2'>{user.diseases}</td>
               <td className='p-2'>{user.email}</td>

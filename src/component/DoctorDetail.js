@@ -32,7 +32,6 @@ function DoctorDetail() {
           if (response.ok) {
             const data = await response.json();
             setdoctors(data)
-            console.log(data)
           } else {
             alert("Something went wrong please login again");
           }
@@ -48,7 +47,7 @@ function DoctorDetail() {
     
 
     useEffect(() => {
-        const doctor = doctors.find(doc => doc.id === parseInt(id));
+        const doctor = doctors.find(doc => doc._id === parseInt(id));
         setSelectedDoctor(doctor);
     }, [id]);
 
@@ -76,7 +75,7 @@ function DoctorDetail() {
                             </div>
 
                             <div className='md:w-[20%] mx-auto text-start  py-3 justify-between flex flex-col bg-white'>
-                                <div className='text-2xl text-gray-600 font-bold'>{selectedDoctor.name}</div>
+                                <div className='text-2xl text-gray-600 font-bold'>{selectedDoctor.firstname}</div>
                                 <div className='text-lg text-green-700'><MdOutlineVerified /></div>
                                 <div >{selectedDoctor.service}</div>
                                 <div className="text-[#007569]  text-sm font-bold">{selectedDoctor.specialty}</div>

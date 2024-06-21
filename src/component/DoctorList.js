@@ -9,9 +9,9 @@ const DoctorList = () => {
 
   const [search, setSearch] = useState("");
 
-  // const filterByData = users.filter(user =>
-  //   user.firstname.toLowerCase().includes(search.toLowerCase())
-  // );
+  const filterByData = users.filter(user =>
+    user.firstname.toLowerCase().includes(search.toLowerCase())
+  );
 
 
   const fetchData = async () => {
@@ -28,7 +28,6 @@ const DoctorList = () => {
       if (response.ok) {
         const data = await response.json();
         setusers(data)
-        console.log(data)
       } else {
         alert("Something went wrong please login again");
       }
@@ -85,14 +84,14 @@ const DoctorList = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {filterByData.filter((e)=>(
+                    {filterByData.filter((e)=>(
                       e.type=="doctor"
                     )).map(user => (
                       <tr key={user.id} className='text-center border-b'>
                         <td className='py-2'>
                           <img src={user.picture} alt={user.name} className='rounded-full w-10 h-10 mx-auto' />
                         </td>
-                        <td className='py-2 px-2 whitespace-nowrap'>{user.name}</td>
+                        <td className='py-2 px-2 whitespace-nowrap'>{user.firstname}{user.lastname}</td>
                         <td className={`p-0  px-2 whitespace-nowrap ${user.gender === "Male" ? "bg-[#ADD2FF] rounded-xl text-[#1C6DD0]" : "bg-pink-400 rounded-xl text-pink-800"}`}>{user.gender}</td>
                         <td className='py-2 px-2 whitespace-nowrap'>{user.dateJoined}</td>
                         <td className='py-2 px-2 whitespace-nowrap'>{user.degree}</td>
@@ -100,7 +99,7 @@ const DoctorList = () => {
                         <td className={`py-2 px-2 rounded-xl whitespace-nowrap ${user.status === "Available" ? "bg-[#9CFFB2] text-[#007112]" : "bg-red-200"}`}>{user.status}</td>
                         <td className='py-2 px-2 whitespace-nowrap'>{user.contact}</td>
                       </tr>
-                    ))} */}
+                    ))}
                   </tbody>
                 </table>
               </div>

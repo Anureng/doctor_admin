@@ -8,7 +8,7 @@ const AllUser = () => {
   const [search, setSearch] = useState("");
 
   const filterByData = users.filter(user =>
-    user.name.toLowerCase().includes(search.toLowerCase())
+    user.firstname.toLowerCase().includes(search.toLowerCase())
   );
 
 
@@ -27,7 +27,6 @@ const AllUser = () => {
       if (response.ok) {
         const data = await response.json();
         setusers(data)
-        console.log(data)
       } else {
         alert("Something went wrong please login again");
       }
@@ -84,7 +83,7 @@ const AllUser = () => {
                 <td className='flex items-center justify-center p-2'>
                   <img src={user.profile} className='w-10 h-10 rounded-full' alt='Profile' />
                 </td>
-                <td className='p-2'>{user.name}</td>
+                <td className='p-2'>{user.firstname}</td>
                 <td className='p-2'>{user.gender}</td>
                 <td className='p-2'>{user.time}</td>
                 <td className='p-2'>{user.date}</td>

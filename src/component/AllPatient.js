@@ -44,7 +44,7 @@ const AllPatient = () => {
     
         if (searchDoctor) {
           filtered = filtered.filter(doctor =>
-            doctor.name.toLowerCase().includes(searchDoctor.toLowerCase())
+            doctor.firstname.toLowerCase().includes(searchDoctor.toLowerCase())
           );
         }
     
@@ -54,11 +54,11 @@ const AllPatient = () => {
           );
         }
     
-        if (searchSpecialist) {
-          filtered = filtered.filter(doctor =>
-            doctor.degree.toLowerCase().includes(searchSpecialist.toLowerCase())
-          );
-        }
+        // if (searchSpecialist) {
+        //   filtered = filtered.filter(doctor =>
+        //     doctor.degree.toLowerCase().includes(searchSpecialist.toLowerCase())
+        //   );
+        // }
     
         setFilteredData(filtered);
       }, [searchDoctor, searchLocation, searchGender, searchSpecialist, data]);
@@ -75,14 +75,16 @@ const AllPatient = () => {
           />
       <div className='flex justify-evenly p-4 lg:p-0 mt-10 mb-10 flex-col lg:flex-row space-y-5 md:space-y-0'>
         <div className='lg:w-full space-y-6 overflow-hidden overflow-y-scroll h-[40rem] no-scrollbar '>
-          {filteredData.map((el) => (
+          {filteredData.filter((e)=>(
+                      e.type=="patient"
+                    )).map((el) => (
             <div key={el.id} className='flex bg-white items-center justify-between border p-4 rounded-lg'>
               <div className='flex items-center'>
                 <div>
                   <img src='/login.png' alt='Loading...' className='md:w-72 md:h-72' />
                 </div>
                 <div className='w-fit'>
-                  <p>{el.name}</p>
+                  <p>{el.firstname}</p>
                   <p>{el.degree}</p>
                   <p>{el.clinicName}</p>
                   <p>⭐⭐⭐⭐⭐⭐</p>

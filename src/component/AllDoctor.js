@@ -21,7 +21,7 @@ const AllDoctor = () => {
 
     if (searchDoctor) {
       filtered = filtered.filter(doctor =>
-        doctor.name.toLowerCase().includes(searchDoctor.toLowerCase())
+        doctor.firstname.toLowerCase().includes(searchDoctor.toLowerCase())
       );
     }
 
@@ -31,11 +31,11 @@ const AllDoctor = () => {
       );
     }
 
-    if (searchSpecialist) {
-      filtered = filtered.filter(doctor =>
-        doctor.degree.toLowerCase().includes(searchSpecialist.toLowerCase())
-      );
-    }
+    // if (searchSpecialist) {
+    //   filtered = filtered.filter(doctor =>
+    //     doctor.degree.toLowerCase().includes(searchSpecialist.toLowerCase())
+    //   );
+    // }
 
     setFilteredData(filtered);
   }, [searchDoctor, searchLocation, searchGender, searchSpecialist, data]);
@@ -55,7 +55,6 @@ const AllDoctor = () => {
       if (response.ok) {
         const data = await response.json();
         setData(data)
-        console.log(data)
       } else {
         alert("Something went wrong please login again");
       }
@@ -81,14 +80,16 @@ const AllDoctor = () => {
       />
       <div className='flex justify-evenly p-4 lg:p-0 mt-10 mb-10 flex-col lg:flex-row space-y-5 md:space-y-0'>
         <div className='lg:w-full space-y-6 overflow-hidden overflow-y-scroll h-[600px] no-scrollbar '>
-          {filteredData.map((el) => (
+          {filteredData.filter((e)=>(
+                      e.type=="doctor"
+                    )).map((el) => (
             <div key={el.id} className='flex bg-white items-center justify-between border p-4 rounded-lg'>
               <div className='flex items-center'>
                 <div>
                   <img src='/login.png' alt='Loading...' className='md:w-72 md:h-72' />
                 </div>
                 <div className=' mx-auto text-start  py-3 justify-between flex flex-col bg-white'>
-                  <div className=' textxl md:text-2xl text-gray-600 font-bold'>{el.name}</div>
+                  <div className=' textxl md:text-2xl text-gray-600 font-bold'>{el.firstname}</div>
                   <div className='text-lg text-green-700'><MdOutlineVerified /></div>
                   <div >{el.service}</div>
                   <div className="text-[#007569]  text-sm font-bold">{el.specialty}</div>

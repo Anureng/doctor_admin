@@ -1,51 +1,40 @@
 // BookingAppointmentTable.js
 import React from 'react';
+import { useEffect,useState } from 'react';
 
-const data = [
-  {
-    id: 1,
-    profilePic: 'https://via.placeholder.com/40', // Replace with actual image URLs
-    patientName: 'Ralph Edwards',
-    assignedDoctor: 'Dr Claire',
-    date: '2024/06/20',
-    diseases: 'Fever',
-  },
-  {
-    id: 2,
-    profilePic: 'https://via.placeholder.com/40',
-    patientName: 'Esther Howard',
-    assignedDoctor: 'Dr. Johnson',
-    date: '2024/06/21',
-    diseases: 'Cavity',
-  },
-  {
-    id: 3,
-    profilePic: 'https://via.placeholder.com/40',
-    patientName: 'Esther Howard',
-    assignedDoctor: 'Dr. Johnson',
-    date: '2024/06/21',
-    diseases: 'Cavity',
-  },
-  {
-    id: 4,
-    profilePic: 'https://via.placeholder.com/40',
-    patientName: 'Esther Howard',
-    assignedDoctor: 'Dr. Johnson',
-    date: '2024/06/21',
-    diseases: 'Cavity',
-  },
-  {
-    id: 5,
-    profilePic: 'https://via.placeholder.com/40',
-    patientName: 'Esther Howard',
-    assignedDoctor: 'Dr. Johnson',
-    date: '2024/06/21',
-    diseases: 'Cavity',
-  },
-  // Add more data as needed
-];
+
 
 const BookingAppointmentTable = () => {
+const [data,setdata] = useState([])
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://doctors-backend-ztcl.onrender.com/getallbookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setdata(data)
+      } else {
+        alert("Something went wrong please login again");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  }
+
+  useEffect(() => {
+
+    fetchData();
+  }, []);
+
+
   return (
     <div className="overflow-x-auto">
       <h1 className="text-xl text-start bg-white rounded-t-xl py-3 px-4 font-bold ">Booking Appointment</h1>

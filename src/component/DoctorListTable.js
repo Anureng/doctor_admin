@@ -4,7 +4,7 @@ import React,{useState,useEffect} from 'react';
 
 
 const DoctorListTable = () => {
-  const [doctorData, setdoctorData] = useState("");
+  const [doctorData, setdoctorData] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -51,21 +51,21 @@ const DoctorListTable = () => {
             <tr key={doctor.id} className="text-center border-t">
               <td className="px-4 py-2">
                 <img
-                  src={doctor.profilePic}
+                  src={doctor.profilepic}
                   alt="Profile"
                   className="w-10 h-10 rounded-full mx-auto"
                 />
               </td>
-              <td className="px-4 py-2">{doctor.name}</td>
+              <td className="px-4 py-2">{doctor.firstname} {doctor.lastname}</td>
               <td className="px-4 py-2">
                 <span
                   className={`inline-block px-2 py-1 text-xs font-semibold rounded-full ${
-                    doctor.status === 'Present'
+                    "Present" === 'Present'
                       ? 'bg-green-200 text-green-800'
                       : 'bg-red-200 text-red-800'
                   }`}
                 >
-                  {doctor.status}
+                  Present
                 </span>
               </td>
             </tr>

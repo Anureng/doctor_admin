@@ -46,6 +46,7 @@ const [data,setdata] = useState([])
             <th className="px-4 py-2">Fee</th>
             <th className="px-4 py-2">Date</th>
             <th className="px-4 py-2">Diseases</th>
+            <th className="px-4 py-2">Payment Status</th>
           </tr>
         </thead>
         <tbody className='rounded-lg'>
@@ -63,6 +64,10 @@ const [data,setdata] = useState([])
               <td className="px-4 py-2">{appointment.fee}</td>
               <td className="px-4 py-2">{appointment.date}</td>
               <td className="px-4 py-2">{appointment.Currentproblem}</td>
+              {
+                appointment.paymentdone ?<td className="px-4 py-2">Done</td> :
+                <td className="px-4 py-2">Pending</td>
+              }
             </tr>
           ))}
         </tbody>

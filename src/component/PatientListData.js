@@ -18,7 +18,6 @@ const PatientListData = () => {
       if (response.ok) {
         const data = await response.json();
         setusers(data)
-        console.log(data)
       } else {
         alert("Something went wrong please login again");
       }
@@ -35,17 +34,17 @@ const PatientListData = () => {
       const [search, setSearch] = useState("");
     
       const filterByData = users.filter(user =>
-        user.name.toLowerCase().includes(search.toLowerCase())
+        user.firstname.toLowerCase().includes(search.toLowerCase())
       );
     
   return (
     <div className='bg-white w-full rounded-lg shadow-lg'>
     <div className='flex flex-col md:flex-row items-center justify-between p-4'>
-      <p className='text-3xl mb-2 md:mb-0'>Appointments</p>
+      <p className='text-3xl mb-2 md:mb-0'>Patient List</p>
       <div className='flex items-center text-sm md:text-base'>
         <p>Dashboard</p>
         <FaAngleRight className='text-blue-600 mx-2' />
-        <p>Appointments</p>
+        <p>PatientList</p>
       </div>
     </div>
 
@@ -68,10 +67,10 @@ const PatientListData = () => {
             <th className="p-2">Profile</th>
             <th className="p-2">Name</th>
             <th className="p-2">Gender</th>
-            <th className="p-2">Diseases</th>
+            <th className="p-2">Location</th>
             <th className="p-2">Email</th>
             <th className="p-2">Phone</th>
-            <th className="p-2">Status</th>
+            <th className="p-2">DOB</th>
             <th className="p-2">Blood</th>
           </tr>
         </thead>
@@ -81,15 +80,15 @@ const PatientListData = () => {
                     )).map((user, index) => (
             <tr key={index} className="border-b">
               <td className='flex items-center justify-center p-2'>
-                <img src={user.profile} className='w-10 h-10 rounded-full' alt='Profile' />
+                <img src={user.profilepic} className='w-10 h-10 rounded-full' alt='Profile' />
               </td>
-              <td className='p-2'>{user.firstname}</td>
+              <td className='p-2'>{user.firstname} {user.lastname}</td>
               <td className='p-2'>{user.gender}</td>
-              <td className='p-2'>{user.diseases}</td>
+              <td className='p-2'>{user.location}</td>
               <td className='p-2'>{user.email}</td>
-              <td className='p-2'>{user.phone}</td>
-              <td className='p-2'>{user.Status}</td>
-              <td className='p-2'>{user.Blood}</td>
+              <td className='p-2'>{user.Phoneno}</td>
+              <td className='p-2'>{user.dob}</td>
+              <td className='p-2'>{user.bloodgroup}</td>
             </tr>
           ))}
         </tbody>

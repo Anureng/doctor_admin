@@ -38,16 +38,16 @@ function Navbar() {
           <SidePanel />
         ) : (
           <div className={`lg:flex space-x-8 ${open ? 'flex flex-col lg:flex-row w-full' : 'hidden lg:flex'} items-center`}>
-            <div className={`flex items-center space-x-1 rounded-lg w-full lg:w-96 p-2 mt-4 lg:mt-0 ${open ? 'bg-[#007569] text-white' : 'bg-white'}`}>
+            {/* <div className={`flex items-center space-x-1 rounded-lg w-full lg:w-96 p-2 mt-4 lg:mt-0 ${open ? 'bg-[#007569] text-white' : 'bg-white'}`}>
               <CiSearch className={open ? 'text-white' : 'text-black'} />
               <input placeholder='Search Doctor' className={`focus:outline-none w-96 ${open ? 'text-white placeholder-white' : 'text-black placeholder-black'}`} />
-            </div>
+            </div> */}
 
             <div className='list-none w-full flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-3 mt-4 lg:mt-0'>
               <Link to="/"><li className={`cursor-pointer flex items-center justify-center ${open ? 'bg-[#007569] text-white p-2 rounded-md' : ''}`}>Home</li></Link>
-              <Link to="/service"><li className={`cursor-pointer flex items-center justify-center ${open ? 'bg-[#007569] text-white p-2 rounded-md' : ''}`}>Service</li></Link>
-              <Link to="/doctors"><li className={`cursor-pointer flex items-center justify-center ${open ? 'bg-[#007569] text-white p-2 rounded-md' : ''}`}>Doctors</li></Link>
-              <Link to="/about"><li className={`cursor-pointer flex items-center justify-center ${open ? 'bg-[#007569] text-white p-2 rounded-md' : ''}`}>About Us <IoIosArrowDown className='text-xl' /></li></Link>
+              <Link to="/patient/list"><li className={`cursor-pointer flex items-center justify-center ${open ? 'bg-[#007569] text-white p-2 rounded-md' : ''}`}>patient</li></Link>
+              <Link to="/doctor/list"><li className={`cursor-pointer flex items-center justify-center ${open ? 'bg-[#007569] text-white p-2 rounded-md' : ''}`}>Doctors</li></Link>
+              <Link to="/appointment"><li className={`cursor-pointer flex items-center justify-center ${open ? 'bg-[#007569] text-white p-2 rounded-md' : ''}`}>Appointments <IoIosArrowDown className='text-xl' /></li></Link>
             </div>
 
             {isLoggedIn ? (

@@ -86,29 +86,29 @@ const AllDoctor = () => {
             <div key={el.id} className='flex bg-white items-center justify-between border p-4 rounded-lg'>
               <div className='flex items-center'>
                 <div>
-                  <img src='/login.png' alt='Loading...' className='md:w-72 md:h-72' />
+                  <img src={el.profilepic} alt='Loading...' className='md:w-72 md:h-72 m-2' />
                 </div>
                 <div className=' mx-auto text-start  py-3 justify-between flex flex-col bg-white'>
-                  <div className=' textxl md:text-2xl text-gray-600 font-bold'>{el.firstname}</div>
+                  <div className=' textxl md:text-2xl text-gray-600 font-bold'>{el.firstname} {el.lastname}</div>
                   <div className='text-lg text-green-700'><MdOutlineVerified /></div>
-                  <div >{el.service}</div>
-                  <div className="text-[#007569]  text-sm font-bold">{el.specialty}</div>
+                  <div >{el.services.specialities}</div>
+                  <div className="text-[#007569]  text-sm font-bold">{el.location}</div>
                   <p className="text-yellow-500 text-xl ">★★★★★</p>
-                  <div className=' flex gap-2 '>
+                  {/* <div className=' flex gap-2 '>
                     <FaRegHeart className='border-[0.5px] border-gray-600 rounded-sm p-1 text-xl' /><span> Add to favourites</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className='space-y-2 mx-2'>
 
-                <div className='flex gap-2'> <IoIosCalendar className='mt-1 text-gray-700' /> {el.availableDays}</div>
-                <div className='flex gap-2'> <GrLocation className='mt-1 font-bold text-gray-700' />{el.feedbackCount} Feedbacks</div>
-                <div className='flex gap-2 text-[#007569]'> <IoClipboardOutline className='mt-1 font-bold text-gray-700' />Available Now</div>
+                <div className='flex gap-2'> <IoIosCalendar className='mt-1 text-gray-700' /> {el.Phoneno}</div>
+                <div className='flex gap-2'> <GrLocation className='mt-1 font-bold text-gray-700' />{el.language}</div>
+                <div className='flex gap-2 text-[#007569]'> <IoClipboardOutline className='mt-1 font-bold text-gray-700' />{el.fees}</div>
                 <div className='flex gap-2'> <GrLocation className='mt-1 font-bold text-gray-700' />{el.location}</div>
 
 
 
-                <Link to={`/doctor/profile/${el.id}`}>
+                <Link to={`/doctor/profile/${el._id}`}>
                   <button className='border border-[#007569] text-sm md:text-md text-[#007569] px-1 md:py-2 py-1 rounded-md'>View Profile</button>
                 </Link>
               </div>

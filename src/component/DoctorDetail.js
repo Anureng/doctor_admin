@@ -46,16 +46,16 @@ function DoctorDetail() {
       }, []);
     
 
-    useEffect(() => {
-        const doctor = doctors.find(doc => doc._id === parseInt(id));
-        setSelectedDoctor(doctor);
-    }, [id]);
+    // useEffect(() => {
+    //     const doctor = doctors.find(doc => doc._id === id);
+    //     setSelectedDoctor(doctor);
+    // }, [id]);
 
 
 
-    if (!selectedDoctor) {
-        return <div>Loading...</div>;
-    }
+    // if (!selectedDoctor) {
+    //     return <div>Loading...</div>;
+    // }
 
     return (
         <>
@@ -68,20 +68,25 @@ function DoctorDetail() {
                     <div className=' hidden md:inline-flex'>
                         <SidePanel />
                     </div>
+                    {doctors.filter((e)=>(
+                      e.type=="doctor"
+                    )).filter((e)=>(
+                        e._id==id
+                      )).map(selectedDoctor => (
                     <div className='lg:w-3/5 flex flex-col w-full'>
+
                         <section className='lg:flex lg:flex-row  lg:mx-auto md:mx-10 grid grid-cols-1 bg-white p-4 gap-2 rounded-lg border-[1px] border-[#BABABA] mx-auto justify-between'>
                             <div className='lg:w-[25%]  p-2 mx-auto bg-white'>
-                                <img className='h-[220px] w-[220px]  rounded-md overflow-hidden  bg-[#017A884D]' src={selectedDoctor.image} alt='doctor' />
+                                <img className='h-[220px] w-[220px]  rounded-md overflow-hidden  bg-[#017A884D]' src={selectedDoctor.profilepic} alt='doctor' />
                             </div>
 
                             <div className='md:w-[20%] mx-auto text-start  py-3 justify-between flex flex-col bg-white'>
-                                <div className='text-2xl text-gray-600 font-bold'>{selectedDoctor.firstname}</div>
+                                <div className='text-2xl text-gray-600 font-bold'>{selectedDoctor.firstname} {selectedDoctor.lastname}</div>
                                 <div className='text-lg text-green-700'><MdOutlineVerified /></div>
-                                <div >{selectedDoctor.service}</div>
-                                <div className="text-[#007569]  text-sm font-bold">{selectedDoctor.specialty}</div>
+                                <div className="text-[#007569]  text-sm font-bold">{selectedDoctor.services.specialities}</div>
                                 <p className="text-yellow-500 text-xl ">★★★★★</p>
                                 <div className=' flex gap-2 '>
-                                    <FaRegHeart className='border-[0.5px] border-gray-600 rounded-sm p-1 text-xl' /><span> Add to favourites</span>
+                                    <span>{selectedDoctor.language}</span>
                                 </div>
                             </div>
 
@@ -89,16 +94,16 @@ function DoctorDetail() {
                                 <div className='flex gap-3 mx-auto flex-col'>
                                     <div className='flex gap-2'>
                                         <FaUserAlt className='border-[0.5px]  text-[#A300EF] border-[#00000040] rounded-sm p-1 text-2xl ' />
-                                        <span className='text-xl  text-gray-700'>{selectedDoctor.patientsTreated} Patients Treated</span>
+                                        <span className='text-xl  text-gray-700'>{selectedDoctor.email}</span>
                                     </div>
                                     <div className='flex gap-2 '>
                                         <BiSolidShoppingBag className='border-[0.5px]  text-[#00A31A] border-[#00000040] rounded-sm  text-2xl ' />
-                                        <span className='text-xl  text-gray-700'>{selectedDoctor.experience}</span>
+                                        <span className='text-xl  text-gray-700'>{selectedDoctor.exp.name}</span>
                                     </div>
                                 </div>
                                 <div className='flex'>
                                     <button className="flex flex-col p-1 py-2 border-[1px] bg-[#F6F6F6]  rounded-l-lg border-[#BABABA]"> Clinic
-                                        <p className=' px-3'>{selectedDoctor.clinicName}</p>
+                                        <p className=' px-3'>{selectedDoctor.clinic}</p>
                                     </button>
                                     <button className="flex flex-col p-1 py-2 border-[1px] bg-[#F6F6F6]  rounded-r-lg border-[#BABABA]">Location
                                         <p className=' px-3'>{selectedDoctor.location}</p>
@@ -107,8 +112,8 @@ function DoctorDetail() {
                             </div>
 
                             <div className='md:w-[25%] mx-auto flex  gap-4 flex-col bg-white'>
-                                <div className='flex gap-2'> <IoIosCalendar className='mt-1 text-gray-700' /> {selectedDoctor.availableDays}</div>
-                                <div className='flex gap-2'> <GrLocation className='mt-1 font-bold text-gray-700' />{selectedDoctor.feedbackCount} Feedbacks</div>
+                                <div className='flex gap-2'> <IoIosCalendar className='mt-1 text-gray-700' /> {selectedDoctor.fees}</div>
+                                <div className='flex gap-2'> <GrLocation className='mt-1 font-bold text-gray-700' />{selectedDoctor.Phoneno}</div>
                                 <div className='flex gap-2 text-[#007569]'> <IoClipboardOutline className='mt-1 font-bold text-gray-700' />Available Now</div>
                                 <div className='flex gap-2'> <GrLocation className='mt-1 font-bold text-gray-700' />{selectedDoctor.location}</div>
 
@@ -118,15 +123,14 @@ function DoctorDetail() {
 
                         <section className=' bg-white rounded-lg mt-3 border border-gray-400 '>
                         <div className="p-4 text-start  rounded-lg">
-                            <h2 className="text-xl  pb-10 font-bold">About {selectedDoctor.name}</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <h2 className="text-xl  pb-10 font-bold">About {selectedDoctor.firstname} {selectedDoctor.lastname}</h2>
+                            <p>{selectedDoctor.description}</p>
                         </div>
+                        
                         </section>
                     </div>
+                    ))}
                 </section>
-
                 <Footer />
             </div>
 

@@ -81,20 +81,19 @@ const AllPatient = () => {
             <div key={el.id} className='flex bg-white items-center justify-between border p-4 rounded-lg'>
               <div className='flex items-center'>
                 <div>
-                  <img src='/login.png' alt='Loading...' className='md:w-72 md:h-72' />
+                  <img src={el.profilepic} alt='Loading...' className='md:w-72 md:h-72' />
                 </div>
                 <div className='w-fit'>
-                  <p>{el.firstname}</p>
-                  <p>{el.degree}</p>
-                  <p>{el.clinicName}</p>
-                  <p>⭐⭐⭐⭐⭐⭐</p>
+                  <p>{el.firstname} {el.lastname}</p>
+                  <p>{el.email}</p>
+                  <p>{el.address}</p>
                   <p>{el.location}</p>
                 </div>
               </div>
               <div className='space-y-2'>
-                <p>Gender : {el.name}</p>
-                <p>Dob : {el.degree}</p>
-                <p>Phone no :{el.clinicName}</p>
+                <p>Gender : {el.gender}</p>
+                <p>Dob : {el.dob}</p>
+                <p>Phone no :{el.Phoneno}</p>
                 <p>Address :{el.location}</p>
               </div>
             </div>

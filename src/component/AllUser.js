@@ -3,7 +3,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 
 const AllUser = () => {
-  const [users, setusers] = useState("");
+  const [users, setusers] = useState([]);
 
   const [search, setSearch] = useState("");
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import Footer from '../component/Footer';
 import SidePanel from '../component/SidePanel';
-import AllUser from '../component/AllUser';
+import AllUser from '../component/BookingAppointmentTable';
 import Navbar from '../component/Navbar';
 const Appointment = () => {
   return (

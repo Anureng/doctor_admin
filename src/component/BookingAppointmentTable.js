@@ -60,7 +60,7 @@ const [data,setdata] = useState([])
                 />
               </td> */}
               <td className="px-4 py-2">{appointment.name}</td>
-              <td className="px-4 py-2">{appointment.doct}</td>
+              <td className="px-4 py-2">{appointment.doctorname}</td>
               <td className="px-4 py-2">{appointment.fee}</td>
               <td className="px-4 py-2">{appointment.date}</td>
               <td className="px-4 py-2">{appointment.Currentproblem}</td>

@@ -16,6 +16,11 @@ function DoctorDetail() {
     const { id } = useParams();
     const [doctors, setdoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState(null);
+    const [selectedValue, setSelectedValue] = useState(false);
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
 
 
     const fetchData = async () => {
@@ -44,18 +49,55 @@ function DoctorDetail() {
     
         fetchData();
       }, []);
-    
-
-    // useEffect(() => {
-    //     const doctor = doctors.find(doc => doc._id === id);
-    //     setSelectedDoctor(doctor);
-    // }, [id]);
 
 
+      const handleAddAvailibility =   async () =>{
+        try {
+          const data = await fetch(
+            `https://doctors-backend-ztcl.onrender.com/updatesettings/${id}`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ Available: String(selectedValue)}),
+            }
+          );
+          if(data.ok){
+            alert("added")
+          }
+          else{
+            alert("try again")
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
 
-    // if (!selectedDoctor) {
-    //     return <div>Loading...</div>;
-    // }
+
+      const handleAddApprove =   async () =>{
+        try {
+          const data = await fetch(
+            `https://doctors-backend-ztcl.onrender.com/updatesettings/${id}`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ Approved: selectedValue}),
+            }
+          );
+          if(data.ok){
+            alert("added")
+          }
+          else{
+            alert("try again")
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
 
     return (
         <>
@@ -128,6 +170,33 @@ function DoctorDetail() {
                         </div>
                         
                         </section>
+                        <div className='bg-white rounded-lg mt-3'>
+      <label htmlFor="trueFalseSelect">Available </label>
+      <select
+        id="trueFalseSelect"
+        value={selectedValue}
+        onChange={handleChange}
+        className="border border-[#007569] text-sm md:text-md text-[#007569] px-1 md:py-2 py-1 rounded-md"
+      >
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
+      <button className='ml-4' onClick={handleAddAvailibility}>Add Available</button>
+    </div>
+
+    <div className='bg-white rounded-lg mt-3'>
+      <label htmlFor="trueFalseSelect">publish </label>
+      <select
+        id="trueFalseSelect"
+        value={selectedValue}
+        onChange={handleChange}
+        className="border border-[#007569] text-sm md:text-md text-[#007569] px-1 md:py-2 py-1 rounded-md"
+      >
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
+      <button className='ml-4' onClick={handleAddApprove}>publish the doctor</button>
+    </div>
                     </div>
                     ))}
                 </section>

@@ -2,6 +2,9 @@ import {storage} from "../firebase.config";
 import {ref, uploadBytes, getDownloadURL} from "firebase/storage"
 import React from 'react'
 import { useState } from 'react';
+import { useAuth } from '../AuthContext';
+import {  useNavigate } from 'react-router-dom';
+import { ImSwitch } from "react-icons/im";
 
 
 
@@ -13,6 +16,9 @@ const SettingPersonal = () => {
   const [bio, setBio] = useState("");
   const [language, setLanguage] = useState("")
   const [profilepic, setProfilepic] = useState("")
+  const { logout } = useAuth();
+  const nav = useNavigate();
+
 
 
   
@@ -159,7 +165,15 @@ const SettingPersonal = () => {
             </div>
           </div>
 
-          <p className=' flex justify-end mt-3'>
+          <p className=' flex  gap-3 justify-end mt-3'>
+          <button className='bg-[#007569] flex  gap-1 px-3 py-1 rounded-lg text-white'
+               onClick={() => {
+                logout()
+                nav("/")
+            }}>
+               <ImSwitch className=' mt-[5px] py-auto text-center ' />
+             Logout 
+            </button>
             <button className='bg-[#007569] px-3 py-1 rounded-lg text-white'
               onClick={handlePersonalInfoSubmit}>
               Save Changes

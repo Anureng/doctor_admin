@@ -9,6 +9,7 @@ import { CiSearch } from "react-icons/ci";
 function Review() {
   const [reviewsData, setreviewsData] = useState([]);
   const [activeTab, setActiveTab] = useState('all review');
+  const [users, setusers] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -24,6 +25,29 @@ function Review() {
       if (response.ok) {
         const data = await response.json();
         setreviewsData(data)
+        console.log(data)
+      } else {
+        alert("Something went wrong please login again");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  }
+
+  const fetchData1 = async () => {
+    try {
+      const response = await fetch(
+        "https://doctors-backend-ztcl.onrender.com/users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setusers(data)
       } else {
         alert("Something went wrong please login again");
       }
@@ -33,11 +57,11 @@ function Review() {
   }
 
   useEffect(() => {
-
+fetchData1()
     fetchData();
   }, []);
 
-  const filteredReviews = reviewsData.filter(review => review.status === activeTab);
+  // const filteredReviews = reviewsData.filter(review => review.status === activeTab);
 
   return (
     <div className='bg-[#0075691A] min-h-screen flex flex-col'>
@@ -90,12 +114,19 @@ function Review() {
             </div>
 
             <div className='rounded-lg bg-[#F7F7F7] border mx-5 border-[#BEBEBE] mt-5  pb-2 mb-5'>
-              {filteredReviews.map((review, index) => (
+              {reviewsData.map((review, index) => (
                 <div key={index} className="p-4 flex gap-3">
                   <div className='flex items-center'>
-                    <div className='lg:h-[160px] lg:w-[200px] md:h-[170px] md:w-[170px] h-[50px] w-[50px] p-2 mx-auto'>
-                      <img className='lg:h-[160px] lg:w-[200px] md:h-[170px] md:w-[170px] h-[50px] w-[50px] overflow-hidden bg-[#017A884D]' src={review.image} alt='doctor' />
+                  {users.filter((e)=>(
+                      e.type=="doctor"
+                    )).filter((e1)=>(
+                      e1._id==review.doctorid
+                    )).map(user => (
+<div className='lg:h-[160px] lg:w-[200px] md:h-[170px] md:w-[170px] h-[50px] w-[50px] p-2 mx-auto'>
+                      <img className='lg:h-[160px] lg:w-[200px] md:h-[170px] md:w-[170px] h-[50px] w-[50px] overflow-hidden bg-[#017A884D]' src={user.profilepic} alt='doctor' />
                     </div>
+                    ))}
+                    
 
                     <div className='flex flex-col gap-2'>
                       <div className='flex gap-2'>
@@ -103,7 +134,9 @@ function Review() {
                         <p className="text-[#F89603] text-xl ">{"★".repeat(review.rating)}</p>
                       </div>
                       <p className='md:text-[16px] text-start text-semibold leading-[28.21px] text-sm'>{review.feedback}</p>
-                      <p className='text-start mt-2 text-xs text-gray-600 font-semibold'>{review.recommend}</p>
+                      <p className='text-start mt-2 text-xs text-gray-600 font-semibold'>Recommended : <>
+                      {
+                      review.recommend ?<span>yes</span> : <span>no</span>}</></p>
                     </div>
                   </div>
 

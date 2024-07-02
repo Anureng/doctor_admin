@@ -10,6 +10,65 @@ const SignUpData = () => {
   const [type , settype] = useState("")
   const [firstname , setfirstname] = useState("")
   const [lastname , setlastname] = useState("")
+  const [varified , setvarified] = useState(false)
+  const [otpsent , setotpsent] = useState(false)
+  const [otp , setotp] = useState("")
+
+
+  const sentotp = async(e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        "https://doctors-backend-ztcl.onrender.com/sendotp",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email}),
+        }
+      );
+
+      if (response.ok) {
+        alert("otp sent check your mail")
+          setotpsent(true)
+      } else {
+        alert("something went wrong...please check credential");
+      }
+      console.log(response);
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  };
+
+  const varifyotp = async(e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        "https://doctors-backend-ztcl.onrender.com/verifyotp",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email,otp}),
+        }
+      );
+
+      if (response.ok) {
+        alert("verified")
+    setvarified(true)
+    setotpsent(false)
+      } else {
+        alert("something went wrong...please check credential");
+      }
+      console.log(response);
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  };
+
+
 
   const handleRegister = async(e) => {
     e.preventDefault();
@@ -71,8 +130,8 @@ navigate('/login')
             className='w-full px-3 py-2 border rounded'
           />
         </div>
-
-        <div className='mb-4'>
+        <div className='mb-4 flex flex-row gap-8'>
+        <div>
           <label className='block text-gray-700 w-fit mb-2' htmlFor='email'>Email</label>
           <input 
             id='email'
@@ -83,6 +142,32 @@ navigate('/login')
             className='w-full px-3 py-2 border rounded'
           />
         </div>
+        {
+        (!otpsent ?
+<button onClick={sentotp} className='w-28 h-11 mt-8 bg-[#007569] text-white  rounded '>
+    Send otp
+  </button> :
+  <button onClick={varifyotp} className='w-28 h-11 mt-8 bg-[#007569] text-white  rounded '>
+  Verify otp
+</button>
+        )}
+        </div>
+
+        {
+        (otpsent && (
+          <div className='mb-4'>
+          <label className='block text-gray-700 w-fit mb-2' htmlFor='location'>Otp</label>
+          <input 
+            id='location'
+            type='text' 
+            placeholder='Enter Otp'
+            value={otp}
+            onChange={(e)=>setotp(e.target.value)}
+            className='w-full px-3 py-2 border rounded'
+          />
+        </div>
+        ))
+       }
 
         <div className='mb-4'>
           <label className='block text-gray-700 w-fit mb-2' htmlFor='password'>Password</label>
@@ -150,10 +235,13 @@ navigate('/login')
             </div>
           </div>
         </div>
-
-        <button onClick={handleRegister} className='w-full bg-[#007569] text-white py-2 rounded '>
-          Signup
-        </button>
+{
+  (varified && (
+    <button onClick={handleRegister} className='w-full bg-[#007569] text-white py-2 rounded '>
+    Signup
+  </button>
+  ))
+}
 
         <div className='mt-2 flex items-center justify-center space-x-2'>
           <p>Already have an account?</p>
